@@ -1,0 +1,6 @@
+CREATE TABLE Clients(id int primary key, surname varchar(255), name varchar(255)) AS SELECT * FROM CSVREAD('C:\Users\galav\Desktop\Clients.txt', null, 'fieldSeparator=|');
+CREATE TABLE Masters(id int primary key, surname varchar(255), name varchar(255)) AS SELECT * FROM CSVREAD('C:\Users\galav\Desktop\Masters.txt', null, 'fieldSeparator=|');
+CREATE TABLE Cli_Mas(id int primary key,
+id_client int, FOREIGN KEY (id_client) REFERENCES Clients(id),
+id_master int, FOREIGN KEY (id_master) REFERENCES Masters(id)) 
+AS SELECT * FROM CSVREAD('C:\Users\galav\Desktop\Cli_Mas.txt', null, 'fieldSeparator=|');
