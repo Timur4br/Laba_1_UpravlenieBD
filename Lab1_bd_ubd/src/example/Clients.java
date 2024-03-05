@@ -6,7 +6,7 @@ public class Clients {
     private String name;
     private Masters id_masters;
 
-    public Clients(int id, String surname, String name, Masters id_masters) {
+    public Clients(int id, String surname, String name,Masters id_masters) {
         this.id = id;
         this.surname = surname;
         this.name = name;

@@ -5,7 +5,7 @@ public class Masters {
     private String name;
     private String surname;
 
-    public Masters(int id, String name, String surname) {
+    public Masters(int id, String surname, String name) {
         this.id = id;
         this.surname = surname;
         this.name = name;

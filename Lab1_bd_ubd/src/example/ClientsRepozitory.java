@@ -30,7 +30,7 @@ public class ClientsRepozitory implements IRepo<Clients> {
     }
     @Override
     public void update(Clients client, int id) throws SQLException {
-        String str = String.format("UPDATE clients SET id = %s, surname = '%s', name = '%s', idStylists = %s WHERE id = %s" ,
+        String str = String.format("UPDATE clients SET id = %s, surname = '%s', name = '%s', id_master = %s WHERE id = %s" ,
                 client.getId(),
                 client.getSurname(),
                 client.getName(),

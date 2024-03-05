@@ -6,7 +6,7 @@ import java.util.List;
 public class MastersRepozitory implements IRepo<Masters> {
     @Override
     public void insert(Masters masters) throws SQLException {
-        String str = String.format("INSERT INTO stylists (id, surname, name) VALUES (%s, '%s', '%s')",
+        String str = String.format("INSERT INTO masters (id, surname, name) VALUES (%s, '%s', '%s')",
                 masters.getId(),
                 masters.getSurname(),
                 masters.getName());
@@ -16,14 +16,14 @@ public class MastersRepozitory implements IRepo<Masters> {
     }
     @Override
     public void delete(Masters masters) throws SQLException {
-        String str = String.format("DELETE  FROM stylists where id = %s" , masters.getId());
+        String str = String.format("DELETE  FROM masters where id = %s" , masters.getId());
         Statement stmt = this.getStatement(this.connectToDB());
         stmt.execute(str);
         stmt.close();
     }
     @Override
     public void update(Masters masters, int id) throws SQLException {
-        String str = String.format("UPDATE stylists SET id = %s, surname = '%s', name = '%s' WHERE id = %s" ,
+        String str = String.format("UPDATE masters SET id = %s, surname = '%s', name = '%s' WHERE id = %s" ,
                 masters.getId(),
                 masters.getSurname(),
                 masters.getName(),
