@@ -18,17 +18,17 @@ public class Main {
         //clientsRepozitory.insert(new Clients(null,"Ромбов", "Антон", masters.get(1), null));
         //clientsRepozitory.insert(new Clients(null,"Кубов", "Виталий", masters.get(2), null));
 
-        System.out.println("---------Список Клиентов---------");
+        
         for (Clients client : clients) {
             BDWork.printClient(client); // Print information about clients
         }
 
-        System.out.println("---------Список Мастеров---------");
+        
         for (Masters masters1 : masters) {
             BDWork.printMasters(masters1); // Print information about stylists
         }
 
-        System.out.println("------Клиенты и их мастера-------");
+    
         for (Clients client : clients) {
             BDWork.printClientMasters(client); // Print information about client-stylist
         }
