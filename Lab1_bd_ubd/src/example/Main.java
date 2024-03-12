@@ -12,14 +12,11 @@ public class Main {
         List<Clients> clients = clientsRepozitory.getList();
         List<Masters> masters = mastersRepozitory.getList();
 
-        //mastersRepozitory.insert(new Masters(4,"Тестов", "Тест"));
-        //mastersRepozitory.insert(new Masters(5,"Магов", "Игорь"));
-        //clientsRepozitory.insert(new Clients(7,"Ромбов", "Антон", new Masters(6,"Уэскер", "Игорь")));
-        //clientsRepozitory.insert(new Clients(8,"Кид", "Александр", new Masters(7,"Золотой", "Глеб")));
-
-        //mastersRepozitory.update(new Masters(2,"Романов", "Артем"), 2);
-        //clientsRepozitory.update(new Clients(6, "Петров", "Никита", new Masters(4,"Тестов", "Тест")), 6);
-
+        //mastersRepozitory.insert(new Masters(null,"Башкиров", "Альберт", null));
+        //mastersRepozitory.insert(new Masters(null,"Русов", "Ящер", null));
+        //mastersRepozitory.insert(new Masters(null,"Пивной", "Богдан", null));
+        //clientsRepozitory.insert(new Clients(null,"Ромбов", "Антон", masters.get(1), null));
+        //clientsRepozitory.insert(new Clients(null,"Кубов", "Виталий", masters.get(2), null));
 
         System.out.println("---------Список Клиентов---------");
         for (Clients client : clients) {

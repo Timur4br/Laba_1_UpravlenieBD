@@ -1,0 +1,7 @@
+CREATE TABLE Masters(id int AUTO_INCREMENT primary key, surname varchar(255), name varchar(255), isDelete BOOLEAN DEFAULT FALSE) 
+AS SELECT * FROM CSVREAD('C:\Users\galav\Idea Projects UBD - LAB\Lab1_bd_ubd\Создание бд2\Masters.txt', null, 'fieldSeparator=|');
+CREATE TABLE Clients(id int AUTO_INCREMENT primary key, surname varchar(255), name varchar(255), id_master int, isDelete BOOLEAN DEFAULT FALSE, FOREIGN KEY (id_master) REFERENCES Masters(id))
+AS SELECT * FROM CSVREAD('C:\Users\galav\Idea Projects UBD - LAB\Lab1_bd_ubd\Создание бд2\Clients.txt', null, 'fieldSeparator=|');
+
+DROP TABLE CLIENTS; 
+DROP TABLE MASTERS

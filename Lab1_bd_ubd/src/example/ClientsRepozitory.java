@@ -9,24 +9,32 @@ import java.util.List;
 
 public class ClientsRepozitory implements IRepo<Clients> {
     @Override
-    public void insert(Clients client) throws SQLException {
-        MastersRepozitory mastersRepozitory = new MastersRepozitory();
-        mastersRepozitory.insert(client.getIdMasters());
-        String str = String.format("INSERT INTO clients (id, surname, name, id_master) VALUES (%s, '%s', '%s', %s)",
-                client.getId(),
+    public int insert(Clients client) throws SQLException {
+        String str = String.format("INSERT INTO clients (surname, name, id_master) VALUES ('%s', '%s', %s)",
                 client.getName(),
                 client.getSurname(),
                 client.getIdMasters().getId());
+
+        client.setDelete(false);
+        this.executeRequest(str);
+        try (ResultSet ms = this.getStatement(this.connectToDB()).executeQuery("SELECT MAX(id) FROM Clients")) {
+            while (ms.next()) {
+                return ms.getInt(1);
+            }
+            return -1;
+        }
+    }
+
+    private void executeRequest(String request) throws SQLException {
         Statement stmt = this.getStatement(this.connectToDB());
-        stmt.execute(str);
+        stmt.execute(request);
         stmt.close();
     }
+
     @Override
     public void delete(Clients client) throws SQLException {
-        String str = String.format("DELETE  FROM clients where id = %s" , client.getId());
-        Statement stmt = this.getStatement(this.connectToDB());
-        stmt.execute(str);
-        stmt.close();
+        String str = String.format("UPDATE Clients SET isDelete = true WHERE id = %s" , client.getId());
+        this.executeRequest(str);
     }
     @Override
     public void update(Clients client, int id) throws SQLException {
@@ -43,17 +51,22 @@ public class ClientsRepozitory implements IRepo<Clients> {
     @Override
     public List<Clients> getList() throws SQLException {
         Statement stmt = this.getStatement(this.connectToDB());
-        ResultSet ms = stmt.executeQuery("SELECT cl.id,  cl.surname, cl.name, cl.id_master, st.id, st.name, st.surname FROM Clients AS cl JOIN Masters AS st ON cl.id_master = st.id");
+        ResultSet rs = stmt.executeQuery("SELECT cl.id, cl.surname ,cl.name, cl.id_master, st.id, st.surname,st.name, st.isDelete, cl.isDelete FROM Clients  AS cl JOIN Masters AS st ON cl.id_master = st.ID");
 
         List<Clients> clients = new ArrayList<>();
-        while(ms.next()) {
-            clients.add(new Clients(ms.getInt("id"),
-                    ms.getString("surname"),
-                    ms.getString("name"),
-                    new Masters(ms.getInt("Masters.id"), ms.getString("Masters.surname"), ms.getString("Masters.name"))));
+        while(rs.next()) {
+            clients.add(new Clients(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("surname"),
+                    new Masters(
+                            rs.getInt("Masters.id"),
+                            rs.getString("Masters.name"),
+                            rs.getString("Masters.surname"),
+                            rs.getBoolean("Masters.ISDELETE")),
+                    rs.getBoolean("Clients.isDelete")));
         }
         this.closeConnection(stmt);
-
         return clients;
     }
     @Override

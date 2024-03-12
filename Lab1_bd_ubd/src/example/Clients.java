@@ -1,16 +1,18 @@
 package example;
 
 public class Clients {
-    private int id;
+    private Boolean isDelete;
+    private Integer id;
     private String surname;
     private String name;
     private Masters id_masters;
 
-    public Clients(int id, String surname, String name,Masters id_masters) {
+    public Clients(Integer id, String surname, String name, Masters id_masters, Boolean isDelete) {
         this.id = id;
         this.surname = surname;
         this.name = name;
         this.id_masters = id_masters;
+        this.isDelete = isDelete;
     }
 
     public int getId() {
@@ -43,5 +45,12 @@ public class Clients {
 
     public void setIdMasters(Masters id_masters) {
         this.id_masters = id_masters;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+    public void setDelete(boolean deleted) {
+        isDelete = deleted;
     }
 }

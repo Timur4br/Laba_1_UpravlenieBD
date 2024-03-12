@@ -1,0 +1,2 @@
+id должно даваться автоматом
+заместо delite + поле IsDelite (false, true) в запросе select нужно выбрать те где значения false  "SELECT ms.id, ms.name FROM Masters AS ms where ms.IsDelete = false"

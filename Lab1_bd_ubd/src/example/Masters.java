@@ -1,14 +1,16 @@
 package example;
 
 public class Masters {
-    private int id;
+    private Boolean isDelete;
+    private Integer id;
     private String name;
     private String surname;
 
-    public Masters(int id, String surname, String name) {
+    public Masters(Integer id, String surname, String name, Boolean isDelete) {
         this.id = id;
         this.surname = surname;
         this.name = name;
+        this.isDelete = isDelete;
     }
 
     public int getId() {
@@ -33,5 +35,12 @@ public class Masters {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+    public void setDelete(boolean deleted) {
+        isDelete = deleted;
     }
 }
